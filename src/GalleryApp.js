@@ -12,7 +12,6 @@ class GalleryApp extends React.Component {
         this.state = {
             images: [],
             query: '',
-            searchEnabled: false,
             error: false
         }
     }
@@ -49,25 +48,19 @@ class GalleryApp extends React.Component {
         this.apiCall('https://api.unsplash.com/search/photos/?client_id=8HurEgRguetU5fAYBS1-_LSot8G_p3PcUCZjPVyuWws&query=' + query, query);
     }
 
-    onChange = (event) => {
-        const query = event.target.value;
-        if (query === '')
+    onChange = (value) => {
+        const query = value;
+        if (query === '') {
             this.listImages();
-        else
+        } else {
             this.searchImages(query);
-    }
-
-    toggleSearch = () => {
-        this.setState(prevState => ({
-            searchEnabled: !prevState.searchEnabled,
-            query: this.state.searchEnabled ? this.state.query : ''
-        }));
+        }
     }
 
     render() {
         return (
             <div>
-                <SearchBar toggleSearch={this.toggleSearch} onUserInput={this.onChange} isVisible={this.state.searchEnabled} query={this.state.query} />
+                <SearchBar onUserInput={this.onChange} />
                 <Gallery images={this.state.images} />
             </div >
         );

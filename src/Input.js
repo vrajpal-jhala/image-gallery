@@ -2,7 +2,7 @@ import React from 'react';
 
 function Input(props) {
 
-    const { isVisible, onUserInput, query } = props;
+    const { isVisible, onChange, value } = props;
 
     return (
         <div className={'search ' + (isVisible ? '' : 'hide')} >
@@ -10,8 +10,8 @@ function Input(props) {
                 type="text"
                 className="form-control"
                 placeholder="Search images..."
-                onChange={onUserInput}
-                value={query}
+                onChange={onChange}
+                value={value}
             />
         </div>
     );
