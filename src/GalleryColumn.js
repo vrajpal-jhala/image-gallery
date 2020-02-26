@@ -1,7 +1,7 @@
 import React from 'react';
 import GalleryItem from './GalleryItem';
 
-function ImageColumn(props) {
+function GalleryColumn(props) {
 
     let { images } = props;
 
@@ -14,4 +14,4 @@ function ImageColumn(props) {
     );
 }
 
-export default ImageColumn;
+export default GalleryColumn;

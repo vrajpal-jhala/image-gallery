@@ -41,26 +41,22 @@ class GalleryApp extends React.Component {
     }
 
     listImages() {
-        this.apiCall('https://api.unsplash.com/photos/?client_id=8HurEgRguetU5fAYBS1-_LSot8G_p3PcUCZjPVyuWws', '');
+        this.apiCall('https://api.unsplash.com/photos/?client_id=8HurEgRguetU5fAYBS1-_LSot8G_p3PcUCZjPVyuWws&per_page=12', '');
     }
 
     searchImages = (query) => {
-        this.apiCall('https://api.unsplash.com/search/photos/?client_id=8HurEgRguetU5fAYBS1-_LSot8G_p3PcUCZjPVyuWws&query=' + query, query);
+        this.apiCall('https://api.unsplash.com/search/photos/?client_id=8HurEgRguetU5fAYBS1-_LSot8G_p3PcUCZjPVyuWws&per_page=12&query=' + query, query);
     }
 
-    onChange = (value) => {
-        const query = value;
-        if (query === '') {
-            this.listImages();
-        } else {
-            this.searchImages(query);
-        }
+    onChange = (event) => {
+        const query = event.target === null ? '' : event.target.value;
+        query === '' ? this.listImages() : this.searchImages(query);
     }
 
     render() {
         return (
             <div>
-                <SearchBar onUserInput={this.onChange} />
+                <SearchBar onChange={this.onChange} />
                 <Gallery images={this.state.images} />
             </div >
         );
