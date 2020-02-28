@@ -1,0 +1,53 @@
+@import "node_modules/bootstrap/scss/bootstrap";
+
+.h1 {
+  font-size: 1.2em;
+}
+
+.h4 {
+  font-size: 1em;
+}
+
+.masonry-grid {
+  position: relative;
+}
+
+@include media-breakpoint-up(sm) {
+  .h1 {
+    font-size: 1.1em;
+  }
+
+  .h4 {
+    font-size: 0.9em;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .h1 {
+    font-size: 0.9em;
+  }
+
+  .h4 {
+    font-size: 0.7em;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .h1 {
+    font-size: 0.9em;
+  }
+
+  .h4 {
+    font-size: 0.8em;
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  .h1 {
+    font-size: 1.7em;
+  }
+
+  .h4 {
+    font-size: 1.2em;
+  }
+}
