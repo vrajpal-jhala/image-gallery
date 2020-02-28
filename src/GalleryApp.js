@@ -15,6 +15,8 @@ class GalleryApp extends React.Component {
             images: [],
             query: '',
             pageNo: 1,
+            hasMore: true,
+            noResult: false,
             error: false
         }
     }
@@ -25,18 +27,31 @@ class GalleryApp extends React.Component {
             url: url,
             responseType: 'json'
         }).then((response) => {
-            const currResponse = this.state.images;
-            const newResponse = query === '' ? response.data : response.data.results;
+            const currResponse = this.state.images, data = response.data;
+            var newResponse, noResult = false, hasMore = false;
+
+            if (query === '') {
+                hasMore = true;
+                newResponse = data;
+            } else {
+                data.total_pages === 0 ? noResult = true : this.state.pageNo >= data.total_pages ? hasMore = false : hasMore = true;
+                newResponse = data.results;
+            }
+
             var finalResponse = currResponse.concat(newResponse);
             this.setState({
                 images: finalResponse,
                 query: query,
+                hasMore: hasMore,
+                noResult: noResult,
                 error: false
             });
         }).catch((error) => {
             this.setState({
                 images: [],
                 query: query,
+                hasMore: false,
+                noResult: true,
                 error: true
             });
         });
@@ -106,6 +121,19 @@ class GalleryApp extends React.Component {
             <div>
                 <SearchBar onChange={this.onChange} />
                 <Gallery images={this.state.images} windowWidth={this.state.windowWidth} />
+                <div className="text-center py-2">
+                    {
+                        this.state.hasMore && <span className="spinner-border text-primary" role="status"></span>
+                    }
+                    {
+                        this.state.noResult
+                        && <div className="row">
+                            <div className="col">
+                                <h1 className="text-center">No Results Found</h1>
+                            </div>
+                        </div>
+                    }
+                </div>
             </div >
         );
     }

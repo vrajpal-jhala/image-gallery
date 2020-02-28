@@ -5,8 +5,6 @@ function Gallery(props) {
 
     var { images, windowWidth } = props;
 
-    var hasMore = images.length > 0;
-
     var totalItems = 12;
 
     var cols = 0, leftIncr = 0;
@@ -60,17 +58,6 @@ function Gallery(props) {
     return (
         <div className="container-fluid">
             <div className="masonry-grid" style={gridStyle}>{images}</div>
-            <div className="text-center py-2">
-                {
-                    hasMore
-                        ? <span className="spinner-border text-primary" role="status"></span>
-                        : <div className="row">
-                            <div className="col">
-                                <h1 className="text-center">No Results Found</h1>
-                            </div>
-                        </div>
-                }
-            </div>
         </div>
     );
 }
