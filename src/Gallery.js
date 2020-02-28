@@ -8,6 +8,7 @@ function Gallery(props) {
     var totalItems = 12;
 
     var cols = 0, leftIncr = 0;
+    var leftToRight = true;
 
     if (windowWidth >= 1200) {
         cols = 4;
@@ -31,7 +32,7 @@ function Gallery(props) {
         var divisor = image.width / colWidth;
         var height = image.height / divisor;
 
-        if (cnt > rows - 1) {
+        if (leftToRight === false && cnt > rows - 1) {
             cnt = 0;
             left += leftIncr;
             colNo++;
@@ -45,8 +46,13 @@ function Gallery(props) {
         const element = (<GalleryItem key={index} url={image.urls.small} userName={image.user.name} userLocation={image.user.location}
             width={colWidth} height={height} left={left} top={prevColsHeights[colNo]} />);
 
-        cnt++;
         prevColsHeights[colNo] += height + 8;
+        if (leftToRight) {
+            colNo++;
+            left += leftIncr;
+        } else {
+            cnt++;
+        }
 
         return element;
     });
