@@ -103,7 +103,9 @@ class GalleryApp extends React.Component {
     onChange = (event) => {
         this.setState({
             images: [],
-            pageNo: 1
+            pageNo: 1,
+            hasMore: true,
+            noResult: false
         });
 
         const query = event.target === null ? this.state.query : event.target.value;
@@ -118,7 +120,7 @@ class GalleryApp extends React.Component {
 
     render() {
         return (
-            <div>
+            <>
                 <SearchBar onChange={this.onChange} />
                 <Gallery images={this.state.images} windowWidth={this.state.windowWidth} />
                 <div className="text-center py-2">
@@ -134,7 +136,7 @@ class GalleryApp extends React.Component {
                         </div>
                     }
                 </div>
-            </div >
+            </>
         );
     }
 }
